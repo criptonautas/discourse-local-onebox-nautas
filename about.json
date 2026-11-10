@@ -1,0 +1,10 @@
+{
+  "name": "Local onebox",
+  "license_url": "https://github.com/criptonautas/discourse-local-onebox-nautas/blob/main/LICENSE",
+  "about_url": "https://github.com/criptonautas/discourse-local-onebox-nautas",
+  "component": true,
+  "modifiers": {
+    "serialize_topic_excerpts": true,
+    "topic_thumbnail_sizes": [[400, 400]]
+  }
+}

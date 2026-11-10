@@ -1,0 +1,39 @@
+@use "lib/viewport";
+
+.local-onebox {
+  // Core's expand swaps in the full post and, on collapse, the text captured
+  // before this component ran: the gist and cover would be lost. The title row
+  // toggles too, so only its links stay clickable.
+  .quote-toggle {
+    display: none;
+  }
+
+  .title {
+    pointer-events: none;
+
+    a {
+      pointer-events: auto;
+    }
+  }
+
+  blockquote {
+    // Contains the floated cover.
+    display: flow-root;
+  }
+
+  &__cover {
+    float: right;
+    width: auto;
+    max-width: 30%;
+    height: auto;
+    margin: 0 0 var(--space-2) var(--space-3);
+    border-radius: var(--d-border-radius);
+
+    @include viewport.until(sm) {
+      float: none;
+      display: block;
+      max-width: 100%;
+      margin: 0 0 var(--space-2);
+    }
+  }
+}
