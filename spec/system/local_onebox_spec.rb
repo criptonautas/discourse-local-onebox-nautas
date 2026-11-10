@@ -2,11 +2,21 @@
 
 RSpec.describe "Local onebox" do
   fab!(:user)
-  fab!(:target) { Fabricate(:topic_with_op) }
-  fab!(:post) do
-    url = "#{Discourse.base_url}/t/#{target.slug}/#{target.id}"
-    quote = "[quote=\"#{user.username}, post:1, topic:#{target.id}\"]\nuna cita normal\n[/quote]"
-    Fabricate(:post, raw: "#{url}\n\nentre medio\n\n#{url}\n\n#{quote}")
+  fab!(:target, :topic_with_op)
+  fab!(:post)
+
+  # Baked by hand, like core's localized_internal_oneboxes_spec: post-processing
+  # would resolve the link over HTTP, which specs block.
+  def onebox
+    <<~HTML
+      <aside class="quote" data-post="1" data-topic="#{target.id}">
+        <div class="title">
+          <div class="quote-controls"></div>
+          <div class="quote-title__text-content"><a href="#{target.relative_url}">#{target.title}</a></div>
+        </div>
+        <blockquote>Comienzo del primer post</blockquote>
+      </aside>
+    HTML
   end
 
   before do
@@ -15,10 +25,15 @@ RSpec.describe "Local onebox" do
       excerpt: "[!tldr] Extracto &amp; <b>resumen</b> del topic",
       image_upload_id: Fabricate(:image_upload).id,
     )
-    # Oneboxes are added in post-processing, which fabrication does not run.
-    cpp = CookedPostProcessor.new(post, invalidate_oneboxes: true)
-    cpp.post_process
-    post.update_columns(cooked: cpp.html)
+    post.update_columns(cooked: <<~HTML)
+      #{onebox}
+      <p>entre medio</p>
+      #{onebox}
+      <aside class="quote" data-username="#{user.username}" data-post="1" data-topic="#{target.id}">
+        <div class="title"><div class="quote-controls"></div>#{user.username}:</div>
+        <blockquote><p>una cita normal</p></blockquote>
+      </aside>
+    HTML
   end
 
   it "swaps text and adds the cover with a single request" do
