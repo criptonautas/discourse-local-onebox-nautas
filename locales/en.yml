@@ -1,0 +1,3 @@
+en:
+  theme_metadata:
+    description: "Internal topic links show the topic's Discourse AI gist, or its excerpt, and its cover image."

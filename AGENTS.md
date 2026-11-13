@@ -10,7 +10,8 @@ pnpm install && pnpm lint
 discourse_theme rspec .
 ```
 
-CI runs both.
+CI runs both. Screenshots in `docs/screenshots/` come from
+`spec/system/screenshots_spec.rb` via Actions → Screenshots.
 
 ## Things that are easy to get wrong
 

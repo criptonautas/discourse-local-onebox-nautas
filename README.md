@@ -9,6 +9,8 @@ the start of its first post and no image. This component replaces that text with
 [Discourse AI](https://meta.discourse.org/t/discourse-ai/259214) gist, or its list excerpt
 when there is no gist, and adds the topic's cover.
 
+![An internal link with the topic's gist and cover](docs/screenshots/local-onebox.png)
+
 ## Install
 
 Admin → Customize → Themes → Components → Install → From a git repository, with this repo's URL.
@@ -22,6 +24,20 @@ Gists show only to the groups allowed in Discourse AI's gist settings. Everyone 
 excerpt.
 
 It works in the forum only. Emails and RSS keep the original box.
+
+Only links to a topic's first post change. Links to a single reply and real quotes stay as
+they are. The box's expand toggle is hidden: expanding would bring back the original text.
+
+Topics in a category the viewer muted don't come back from the topic list, so their boxes stay
+as core renders them.
+
+### Side effects of installing it
+
+- `serialize_topic_excerpts` adds the excerpt to every topic list served with this theme.
+- `topic_thumbnail_sizes` makes Discourse generate a 400px size for existing topics, in the
+  background.
+
+Requires Discourse 2026.1.0 or later.
 
 ## License
 

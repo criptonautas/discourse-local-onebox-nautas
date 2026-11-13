@@ -1,0 +1,3 @@
+es:
+  theme_metadata:
+    description: "Los enlaces internos a un topic muestran su gist de Discourse AI, o su extracto, y su imagen de portada."

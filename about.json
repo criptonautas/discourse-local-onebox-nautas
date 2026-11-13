@@ -1,10 +1,16 @@
 {
   "name": "Local onebox",
-  "license_url": "https://github.com/criptonautas/discourse-local-onebox-nautas/blob/main/LICENSE",
-  "about_url": "https://github.com/criptonautas/discourse-local-onebox-nautas",
+  "license_url": "https://github.com/criptonautas/discourse-local-onebox/blob/main/LICENSE",
+  "about_url": "https://github.com/criptonautas/discourse-local-onebox",
   "component": true,
   "modifiers": {
     "serialize_topic_excerpts": true,
-    "topic_thumbnail_sizes": [[400, 400]]
-  }
+    "topic_thumbnail_sizes": [
+      [
+        400,
+        400
+      ]
+    ]
+  },
+  "minimum_discourse_version": "2026.1.0"
 }
