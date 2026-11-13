@@ -21,7 +21,8 @@
     display: flow-root;
   }
 
-  &__cover {
+  // Scoped under the blockquote so it outranks core's `.cooked img` rules.
+  & blockquote &__cover {
     float: right;
     width: auto;
     max-width: 30%;

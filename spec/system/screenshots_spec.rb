@@ -15,7 +15,7 @@ RSpec.describe "Screenshots" do
     upload_theme_or_component
     target.update_columns(
       excerpt: "What a home node needs, what it costs to run and what it verifies for you.",
-      image_upload_id: Fabricate(:image_upload, width: 800, height: 450).id,
+      image_upload_id: cover.id,
     )
     # Baked by hand: post-processing would resolve the link over HTTP, which specs block.
     topic.first_post.update_columns(cooked: <<~HTML)
@@ -28,6 +28,11 @@ RSpec.describe "Screenshots" do
         <blockquote>Start of the first post</blockquote>
       </aside>
     HTML
+  end
+
+  def cover
+    file = File.open(File.expand_path("../fixtures/cover.jpg", __dir__))
+    UploadCreator.new(file, "cover.jpg").create_for(author.id)
   end
 
   def save(name)
